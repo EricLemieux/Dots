@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <script type="text/javascript" src="js/phaser.min.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+
+    function preload() {
+
+        game.load.image('sprite', 'assets/sprites/cat.jpg');
+
+    }
+
+    function create() {
+
+        //  This simply creates a sprite using the mushroom image we loaded above and positions it at 200 x 200
+        var test = game.add.sprite(200, 200, 'sprite');
+
+    }
+  </script>
+</body>
+</html>
