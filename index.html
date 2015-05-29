@@ -3,6 +3,8 @@
 <head>
   <title>Paddle</title>
   <script type="text/javascript" src="js/phaser.min.js"></script>
+
+  <script type="text/javascript" src="js/update.js"></script>
 </head>
 
 <body>
@@ -11,8 +13,11 @@
     var sprite;
     var canPaddle = true;
 
-    //Some global variable
+    //Constants
     var _turnSpeed = 15;
+
+    //Some global variable
+    var gBoatSpeed = 1;
 
     function preload() {
       //Players avatar
@@ -32,22 +37,12 @@
       sprite.anchor.setTo(0.5, 0.5);
       sprite.position.setTo(200, 450);
 
-    }
-
-    function update(){
-      if(game.input.activePointer.isDown){
-        if(canPaddle){
-          if(game.input.activePointer.screenX > sprite.position.x){
-            sprite.angle -= _turnSpeed;
-          }else{
-            sprite.angle += _turnSpeed;
-          }
-          canPaddle = false;
-        }
+      if(Math.random() >= 0.5){
+        sprite.angle = 15;
+        gBoatSpeed = 0.75;
       }else{
-        if(!canPaddle){
-          canPaddle = true;
-        }
+        sprite.angle = -15;
+        gBoatSpeed = -0.75;
       }
     }
   </script>
