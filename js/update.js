@@ -18,5 +18,17 @@ function update(){
   }
 
   //Slide the boat side to side
-  sprite.position.x += gBoatSpeed;
+  sprite.body.position.x += gBoatSpeed;
+
+  //If the boat reaches the limit of the screen
+  if(sprite.position.x <= 0 || sprite.position.x >= 400){
+    collision();
+  }
+
+  game.physics.arcade.collide(sprite, rock, collision, null, this);
+}
+
+function collision(){
+  //Boat explodes or something and display the players score or something
+  restart();
 }

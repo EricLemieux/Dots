@@ -5,13 +5,16 @@
   <script type="text/javascript" src="js/phaser.min.js"></script>
 
   <script type="text/javascript" src="js/update.js"></script>
+  <script type="text/javascript" src="js/game.js"></script>
 </head>
 
 <body>
   <script type="text/javascript">
-    var game = new Phaser.Game(400, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
+    var game = new Phaser.Game(400, 600, Phaser.AUTO, 'Paddle', { preload: preload, create: create, update: update });
     var sprite;
     var canPaddle = true;
+
+    var rock;
 
     //Constants
     var _turnSpeed = 15;
@@ -26,24 +29,29 @@
     //River background
     game.load.image('river', 'assets/sprites/river.jpg');
 
+    //Obsticals
+    game.load.image('rock', 'assets/sprites/rock.png');
     }
 
     function create() {
+      //Start the physics system
+      game.physics.startSystem(Phaser.Physics.ARCADE);
+
       //Create the background
       var river = game.add.sprite(0,0,'river');
 
       sprite = game.add.sprite(0, 0, 'boat');
-      sprite.scale.setTo(4,4);
       sprite.anchor.setTo(0.5, 0.5);
-      sprite.position.setTo(200, 450);
+      sprite.position.setTo(0,450);
 
-      if(Math.random() >= 0.5){
-        sprite.angle = 15;
-        gBoatSpeed = 0.75;
-      }else{
-        sprite.angle = -15;
-        gBoatSpeed = -0.75;
-      }
+      rock = game.add.sprite(0, 0, 'rock');
+      rock.anchor.setTo(0.5,0.5);
+      rock.position.setTo(400,50);
+
+      game.physics.enable([sprite, rock], Phaser.Physics.ARCADE);
+
+      console.log("restart");
+      restart();
     }
   </script>
 </body>
